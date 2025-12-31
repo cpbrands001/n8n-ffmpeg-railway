@@ -1,5 +1,5 @@
 # n8n + FFmpeg for Railway
-FROM docker.n8n.io/n8nio/n8n:latest
+FROM docker.n8n.io/n8nio/n8n:2.1.4
 
 # Switch to root for package installation
 USER root
