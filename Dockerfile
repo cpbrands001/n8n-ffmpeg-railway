@@ -1,32 +1,5 @@
-# n8n + FFmpeg for Railway
-FROM docker.n8n.io/n8nio/n8n:2.1.4
-
-# Switch to root for package installation
-USER root
-
-# Install FFmpeg and additional tools (Debian-based)
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    imagemagick \
-    curl \
-    wget \
-    fontconfig \
-    fonts-dejavu \
-    fonts-liberation \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Create directory for temporary media processing
-RUN mkdir -p /tmp/n8n-media && \
-    chown -R node:node /tmp/n8n-media
-
-# Verify installations
-RUN ffmpeg -version > /dev/null && \
-    convert -version > /dev/null && \
-    echo "✅ FFmpeg and ImageMagick ready"
-
-# Switch back to node user for security
-USER node
+# n8n for Railway - Clean install
+FROM docker.n8n.io/n8nio/n8n:latest
 
 # Environment variables for Railway
 ENV N8N_DISABLE_UI=false
