@@ -1,21 +1,20 @@
 # n8n + FFmpeg for Railway
-# Complete automation platform with video processing capabilities
-
 FROM docker.n8n.io/n8nio/n8n:latest
 
 # Switch to root for package installation
 USER root
 
-# Install FFmpeg and additional tools
-RUN apk update && apk add --no-cache \
+# Install FFmpeg and additional tools (Updated for Debian)
+RUN apt-get update && apt-get install -y \
     ffmpeg \
     imagemagick \
     curl \
     wget \
     fontconfig \
-    ttf-dejavu \
-    ttf-liberation \
-    && rm -rf /var/cache/apk/*
+    fonts-dejavu \
+    fonts-liberation \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create directory for temporary media processing
 RUN mkdir -p /tmp/n8n-media && \
@@ -41,6 +40,3 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 
 # Expose n8n port
 EXPOSE 5678
-
-# Use n8n's default entrypoint
-# (This is already configured in the base image)
