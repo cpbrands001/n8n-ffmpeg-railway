@@ -1,5 +1,5 @@
 # n8n for Railway - Clean install
-FROM docker.n8n.io/n8nio/n8n:latest
+FROM n8nio/n8n:latest
 
 # Environment variables for Railway
 ENV N8N_DISABLE_UI=false
